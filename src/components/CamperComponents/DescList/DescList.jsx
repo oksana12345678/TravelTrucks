@@ -12,7 +12,7 @@ const DescList = ({ camper }) => {
   const { radio, AC, TV, bathroom, engine, kitchen, transmission } = camper;
 
   return (
-    <>
+    <ul>
       <OptionListContainer>
         {AC && (
           <DescListItem>
@@ -59,7 +59,7 @@ const DescList = ({ camper }) => {
           </DescListItem>
         )}
       </OptionListContainer>
-    </>
+    </ul>
   );
 };
 export default DescList;
