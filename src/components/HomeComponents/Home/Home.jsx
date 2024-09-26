@@ -4,7 +4,7 @@ import {
   Description,
   HomeBackground,
   MainTitle,
-} from "../Home.styled";
+} from "./Home.styled";
 import Button from "../../common/Button/Button";
 
 const Home = () => {

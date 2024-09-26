@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HomeBackground = styled.div`
   @media screen and (min-width: 768px) {
-    background-image: url("../../../public/camper@1x.webp");
+    background-image: url("/camper@1x.webp");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
