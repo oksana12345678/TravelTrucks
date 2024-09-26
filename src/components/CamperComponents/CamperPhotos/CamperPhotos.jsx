@@ -2,7 +2,7 @@ import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css/pagination";
-import { ImageStyle, SwiperStyle } from "./camperPhotos.styled.js";
+import { ImageStyle, SwiperStyle } from "./CamperPhotos.styled.js";
 
 const CamperPhotos = ({ gallery, name }) => {
   return (
