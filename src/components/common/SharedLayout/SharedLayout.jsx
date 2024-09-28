@@ -4,10 +4,11 @@ import { HeaderStyle } from "./SharedLayout.styled";
 
 const SharedLayout = ({ children }) => {
   const location = useLocation();
-  const isCatalog = location.pathname === "/catalog";
+  const isHome = location.pathname === "/";
+
   return (
     <>
-      <HeaderStyle $isCatalog={isCatalog}>
+      <HeaderStyle $isHome={isHome}>
         <Header />
       </HeaderStyle>
       <main>{children}</main>

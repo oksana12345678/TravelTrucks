@@ -5,7 +5,7 @@ import {
   HomeBackground,
   MainTitle,
 } from "./Home.styled";
-import Button from "../../common/Button/Button";
+import Button from "../common/Button/Button";
 
 const Home = () => {
   const navigate = useNavigate();

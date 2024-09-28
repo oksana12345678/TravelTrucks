@@ -10,7 +10,7 @@ export const HomeBackground = styled.div`
     padding: 0 64px;
     justify-content: center;
     gap: 40px;
-    height: 90.75vh;
+    height: calc(100vh - 72px);
   }
 `;
 

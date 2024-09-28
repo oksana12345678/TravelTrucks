@@ -2,16 +2,18 @@ import styled from "styled-components";
 import { Swiper } from "swiper/react";
 
 export const SwiperStyle = styled(Swiper)`
-  width: 292px;
   height: 320px;
+
+  width: ${(props) => (props.$isCamperPage ? "292px" : "1312px")};
 
   .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
+
     border-radius: 10px;
-    border-radius: 10px;
-    background-color: #f0f0f0;
+    height: 320px;
+    width: 292px;
   }
 `;
 

@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
 import CamperListItem from "../CamperListItem/CamperListItem";
-import { selectCamperList } from "../../../redux/camper/selectors";
+import { selectFilteredContacts } from "../../../redux/camper/selectors";
 import { CamperListItemStyle, CamperListStyled } from "./CamperList.styled";
 
 const CamperList = () => {
-  const campers = useSelector(selectCamperList);
+  const campers = useSelector(selectFilteredContacts);
+
+  console.log(campers);
 
   return (
     <>

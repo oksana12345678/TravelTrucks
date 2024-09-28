@@ -8,6 +8,8 @@ export const CamperListStyled = styled.ul`
 
 export const CamperListItemStyle = styled.li`
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 888px;
   height: 368px;
   border: 1px solid var(--secondary-gray-light);

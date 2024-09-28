@@ -1,12 +1,20 @@
 import styled from "styled-components";
 
-export const MainEquipmentContainer = styled.div`
+export const MainVehicleContainer = styled.div`
   display: flex;
   flex-direction: column;
+
   gap: 24px;
 `;
 
-export const EquipmentTitle = styled.h3`
+export const OptionListContainer = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 8px;
+`;
+
+export const VehicleTitle = styled.h3`
   display: flex;
   flex-direction: column;
   font-family: var(--font-family);
@@ -25,18 +33,9 @@ export const EquipmentTitle = styled.h3`
   }
 `;
 
-export const OptionListContainer = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  gap: 8px;
-  width: 360px;
-`;
-
-export const DescListItem = styled.div`
+export const DescListItem = styled.button`
   border: 1px solid var(--secondary-gray-light);
   border-radius: 12px;
-  padding: 16px 27px;
   width: 112px;
   height: 96px;
   gap: 8px;
@@ -44,33 +43,18 @@ export const DescListItem = styled.div`
   font-weight: var(--medium-font);
   font-size: 16px;
   line-height: 1.5;
+  letter-spacing: -0.01em;
   text-align: center;
   color: var(--main-color);
   background-color: var(--primary-gray-color);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-transform: capitalize;
   cursor: pointer;
-
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-  }
 
   &:hover {
     border-color: var(--primary-red-orang-color);
   }
-
-  input {
-    display: none; /* Сховати стандартний чекбокс */
-  }
-
-  ${(props) =>
-    props.isSelected &&
-    `
-    border-color: var(--primary-red-orang-color);
-  `}
 `;

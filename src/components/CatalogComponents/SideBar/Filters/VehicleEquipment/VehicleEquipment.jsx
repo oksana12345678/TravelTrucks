@@ -1,44 +1,50 @@
-import { DescListItem, OptionListContainer } from "./VehicleEquipment.styled";
+import {
+  DescListItem,
+  EquipmentTitle,
+  MainEquipmentContainer,
+  OptionListContainer,
+} from "./VehicleEquipment.styled";
 import Icon from "../../../../common/IconComponent/IconComponent";
 
-const VehicleEquipment = () => {
+const VehicleEquipment = ({ selectedFilters, handleFilter }) => {
+  const handleCheckboxChange = (equipment) => {
+    if (selectedFilters.includes(equipment)) {
+      handleFilter(selectedFilters.filter((item) => item !== equipment));
+    } else {
+      handleFilter([...selectedFilters, equipment]);
+    }
+  };
+
   return (
-    <div>
-      <h4>Vehicle equipment</h4>
+    <MainEquipmentContainer>
+      <EquipmentTitle>Vehicle equipment</EquipmentTitle>
       <ul>
         <OptionListContainer>
-          <DescListItem>
-            <Icon id="icon-wind" width={32} height={32} />
-            AC
-          </DescListItem>
-
-          <DescListItem>
-            <Icon id="icon-tv" width={32} height={32} />
-            TV
-          </DescListItem>
-
-          <DescListItem>
-            <Icon id="icon-bi_droplet" width={32} height={32} />
-            Bathroom
-          </DescListItem>
-
-          <DescListItem>
-            <Icon id="icon-cup-hot" width={32} height={32} />
-            Kitchen
-          </DescListItem>
-
-          <DescListItem>
-            <Icon id="icon-radio" width={32} height={32} />
-            radio
-          </DescListItem>
-
-          <DescListItem>
-            <Icon id="icon-diagram" width={32} height={32} />
-            Automatic
-          </DescListItem>
+          {["AC", "TV", "Bathroom", "Kitchen", "Radio", "Automatic"].map(
+            (equipment) => (
+              <li key={equipment}>
+                <DescListItem>
+                  <input
+                    type="checkbox"
+                    id={`equipment-${equipment}`}
+                    checked={selectedFilters.includes(equipment)}
+                    onChange={() => handleCheckboxChange(equipment)}
+                  />
+                  <label htmlFor={`equipment-${equipment}`}>
+                    <Icon
+                      id={`icon-${equipment.toLowerCase()}`}
+                      width={32}
+                      height={32}
+                    />
+                    {equipment}
+                  </label>
+                </DescListItem>
+              </li>
+            )
+          )}
         </OptionListContainer>
       </ul>
-    </div>
+    </MainEquipmentContainer>
   );
 };
 

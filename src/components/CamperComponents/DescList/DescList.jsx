@@ -1,65 +1,35 @@
-// import { BsWind } from "react-icons/bs";
-// import { BsCupHot } from "react-icons/bs";
-// import { BsDroplet } from "react-icons/bs";
-// import { FaDisplay } from "react-icons/fa6";
-// import { BsFuelPumpDiesel } from "react-icons/bs";
-// import { TbMicrowave } from "react-icons/tb";
-// import { MdOutlineGasMeter } from "react-icons/md";
 import Icon from "../../common/IconComponent/IconComponent";
 import { DescListItem, OptionListContainer } from "./DescList.styled";
 
 const DescList = ({ camper }) => {
-  const { radio, AC, TV, bathroom, engine, kitchen, transmission } = camper;
+  const equipmentOptions = [
+    { key: "AC", icon: "icon-ac" },
+    { key: "TV", icon: "icon-tv" },
+    { key: "Bathroom", icon: "icon-bathroom" },
+    { key: "Kitchen", icon: "icon-kitchen" },
+    { key: "engine", icon: "icon-fuel-pump", label: camper.engine },
+    { key: "radio", icon: "icon-radio" },
+    { key: "transmission", icon: "icon-automatic", label: camper.transmission },
+  ];
 
   return (
     <ul>
       <OptionListContainer>
-        {AC && (
-          <DescListItem>
-            <Icon id="icon-wind" width={20} height={20} />
-            AC
-          </DescListItem>
-        )}
-        {TV && (
-          <DescListItem>
-            <Icon id="icon-tv" width={20} height={20} />
-            TV
-          </DescListItem>
-        )}
-        {bathroom && (
-          <DescListItem>
-            <Icon id="icon-bi_droplet" width={20} height={20} />
-            Bathroom
-          </DescListItem>
-        )}
-        {kitchen && (
-          <DescListItem>
-            <Icon id="icon-cup-hot" width={20} height={20} />
-            Kitchen
-          </DescListItem>
-        )}
-        {engine && (
-          <DescListItem>
-            <Icon id="icon-fuel-pump" width={20} height={20} />
-            {engine}
-          </DescListItem>
-        )}
+        {equipmentOptions.map(({ key, icon, label }) => {
+          const showItem = key === "engine" ? label : camper[key];
 
-        {radio && (
-          <DescListItem>
-            <Icon id="icon-radio" width={20} height={20} />
-            radio
-          </DescListItem>
-        )}
-
-        {transmission && (
-          <DescListItem>
-            <Icon id="icon-diagram" width={20} height={20} />
-            {transmission}
-          </DescListItem>
-        )}
+          return (
+            showItem && (
+              <DescListItem key={key}>
+                <Icon id={icon} width={20} height={20} />
+                {label || key}
+              </DescListItem>
+            )
+          );
+        })}
       </OptionListContainer>
     </ul>
   );
 };
+
 export default DescList;

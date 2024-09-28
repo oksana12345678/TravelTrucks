@@ -8,5 +8,11 @@ export const ButtonView = styled.button`
     height: 56px;
     background: var(--primary-red-orang-color);
     color: var(--white);
+    transition: background 0.4s ease;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--button-hover-color);
+    }
   }
 `;
