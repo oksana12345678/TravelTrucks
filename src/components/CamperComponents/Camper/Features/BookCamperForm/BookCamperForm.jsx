@@ -80,11 +80,9 @@ const BookCamperForm = () => {
 
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
-      // Клас для днів іншого місяця
       if (date.getMonth() !== activeStartDate.getMonth()) {
         return "different-month";
       }
-      // Клас для заблокованих дат
       if (isDateBlocked(date)) {
         return "blocked-date";
       }
@@ -135,7 +133,7 @@ const BookCamperForm = () => {
                     locale={locale}
                     onActiveStartDateChange={({ activeStartDate }) =>
                       setActiveStartDate(activeStartDate)
-                    } // Зберігаємо поточний місяць
+                    }
                     tileDisabled={({ date }) =>
                       date < today || isDateBlocked(date)
                     }
