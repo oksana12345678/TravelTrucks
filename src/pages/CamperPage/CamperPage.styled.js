@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { DotLoader } from "react-spinners";
 import styled from "styled-components";
 
 export const CamperPageSectionStyled = styled.section`
@@ -54,9 +53,10 @@ export const LinkStyled = styled(Link)`
   }
 `;
 
-export const Loader = styled(DotLoader)`
+export const LoaderCamper = styled.div`
   position: absolute;
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+  z-index: 1000;
 `;

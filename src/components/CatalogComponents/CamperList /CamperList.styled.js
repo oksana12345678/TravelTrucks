@@ -12,7 +12,6 @@ export const CamperListItemStyle = styled.li`
   align-items: center;
   justify-content: center;
   width: 888px;
-  height: 368px;
   border: 1px solid var(--secondary-gray-light);
   border-radius: 20px;
   padding: 24px;

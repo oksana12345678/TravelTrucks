@@ -7,10 +7,11 @@ import { selectIsLoading, selectOneCamper } from "../../redux/camper/selectors";
 import {
   CamperPageSectionStyled,
   LinkStyled,
-  Loader,
+  LoaderCamper,
   MiniMenuBarContainer,
   MiniMenuBarList,
 } from "./CamperPage.styled";
+import { DotLoader } from "react-spinners";
 
 const CamperPage = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,9 @@ const CamperPage = () => {
   return (
     <>
       {loading ? (
-        <Loader />
+        <LoaderCamper>
+          <DotLoader color="var( --primary-text-color)" />
+        </LoaderCamper>
       ) : (
         <CamperPageSectionStyled>
           <Camper oneCamper={oneCamper} />
