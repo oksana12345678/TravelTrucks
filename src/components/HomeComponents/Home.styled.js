@@ -11,6 +11,10 @@ export const HomeBackground = styled.div`
     justify-content: center;
     gap: 40px;
     height: calc(100vh - 72px);
+
+    @media (min-resolution: 192dpi) {
+      background-image: url("/camper@2x.webp");
+    }
   }
 `;
 

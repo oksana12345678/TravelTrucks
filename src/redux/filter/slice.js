@@ -8,8 +8,10 @@ const getFavoritesFromLocalStorage = () => {
 const filterSlice = createSlice({
   name: "filter",
   initialState: {
-    status: "",
-    query: "",
+    status: [],
+    query: [],
+    temporaryStorage: [],
+    location: "",
     favorites: getFavoritesFromLocalStorage(),
   },
   reducers: {
@@ -19,13 +21,18 @@ const filterSlice = createSlice({
     setFilterQuery: (state, action) => {
       state.query = action.payload;
     },
+    setTemporaryStorage: (state, action) => {
+      state.temporaryStorage = action.payload;
+    },
+    setLocation: (state, action) => {
+      state.location = action.payload;
+    },
+
     setFavorite(state, action) {
       const index = state.favorites.indexOf(action.payload);
       if (index === -1) {
-        // If not present, add to favorites
         state.favorites.push(action.payload);
       } else {
-        // If present, remove from favorites
         state.favorites.splice(index, 1);
       }
       localStorage.setItem("favorites", JSON.stringify(state.favorites));
@@ -33,6 +40,11 @@ const filterSlice = createSlice({
   },
 });
 
-export const { setStatusFilter, setFilterQuery, setFavorite } =
-  filterSlice.actions;
+export const {
+  setStatusFilter,
+  setFilterQuery,
+  setFavorite,
+  setTemporaryStorage,
+  setLocation,
+} = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;

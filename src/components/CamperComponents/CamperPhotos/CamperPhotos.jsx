@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import { ImageStyle, SwiperStyle } from "./CamperPhotos.styled.js";
 import { useLocation } from "react-router";
 
-const CamperPhotos = ({ gallery, name }) => {
+const CamperPhotos = ({ gallery, name, slidesToShow }) => {
   const location = useLocation();
   const isCamperPage = location.pathname === "/catalog/:camperId";
 
@@ -17,7 +17,7 @@ const CamperPhotos = ({ gallery, name }) => {
       navigation
       pagination={{ clickable: true }}
       direction="horizontal"
-      slidesPerView="auto"
+      slidesPerView={slidesToShow}
       spaceBetween={48}
     >
       <ul>

@@ -33,7 +33,7 @@ export const OptionListContainer = styled.ul`
   width: 360px;
 `;
 
-export const DescListItem = styled.div`
+export const DescListItem = styled.button`
   border: 1px solid var(--secondary-gray-light);
   border-radius: 12px;
   padding: 16px 27px;
@@ -65,11 +65,11 @@ export const DescListItem = styled.div`
   }
 
   input {
-    display: none; /* Сховати стандартний чекбокс */
+    display: none;
   }
 
   ${(props) =>
-    props.isSelected &&
+    props.$isSelected &&
     `
     border-color: var(--primary-red-orang-color);
   `}

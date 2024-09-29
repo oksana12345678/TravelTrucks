@@ -3,16 +3,17 @@ import {
   BookCamperFormStyled,
   BookCamperTitleContainer,
   BookCamperTitleStyled,
+  CamperCalendar,
   ErrorMessageStyled,
   InputContainer,
   InputField,
+  StyledCalendar,
   TextAreaField,
 } from "./BookCamperForm.styled";
 import Button from "../../../../common/Button/Button";
 import * as Yup from "yup";
-import React, { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import "react-calendar/dist/Calendar.css";
-import Calendar from "react-calendar";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -29,12 +30,13 @@ const BookCamperForm = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const inputRef = useRef(null);
+  const [activeStartDate, setActiveStartDate] = useState(new Date());
+  const locale = "en-US";
 
-  //TODO blocking of the reserved date does not work
   const blockedDates = [
-    new Date(2024, 10, 16),
-    new Date(2024, 10, 20),
-    new Date(2024, 10, 25),
+    new Date(2024, 9, 16),
+    new Date(2024, 9, 20),
+    new Date(2024, 9, 25),
   ];
 
   const today = new Date();
@@ -47,8 +49,9 @@ const BookCamperForm = () => {
         blockedDate.getDate() === date.getDate()
     );
   };
+
   const handleDateChange = (date, setFieldValue) => {
-    setSelectedDate(date.toLocaleDateString());
+    setSelectedDate(date);
     setFieldValue("date", date);
     setShowCalendar(false);
   };
@@ -68,13 +71,26 @@ const BookCamperForm = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
+  const tileClassName = ({ date, view }) => {
+    if (view === "month") {
+      // Клас для днів іншого місяця
+      if (date.getMonth() !== activeStartDate.getMonth()) {
+        return "different-month";
+      }
+      // Клас для заблокованих дат
+      if (isDateBlocked(date)) {
+        return "blocked-date";
+      }
+    }
+    return null;
+  };
   return (
     <BookCamperTitleStyled>
       <BookCamperTitleContainer>
@@ -104,26 +120,37 @@ const BookCamperForm = () => {
                 id="date-input"
                 name="date"
                 type="text"
-                value={selectedDate || ""}
+                value={selectedDate ? selectedDate.toLocaleDateString() : ""}
                 placeholder="Booking date*"
                 onClick={() => setShowCalendar(!showCalendar)}
                 readOnly
               />
               {showCalendar && (
-                <div
-                  className="calendar-container"
-                  style={{ position: "absolute", zIndex: 1000 }}
-                  ref={inputRef}
-                >
-                  <Calendar
+                <CamperCalendar ref={inputRef}>
+                  <StyledCalendar
                     onChange={(date) => handleDateChange(date, setFieldValue)}
-                    tileDisabled={tileDisabled} // Блокування дат
+                    tileClassName={tileClassName}
+                    minDetail="month"
+                    value={activeStartDate}
+                    locale={locale}
+                    onActiveStartDateChange={({ activeStartDate }) =>
+                      setActiveStartDate(activeStartDate)
+                    } // Зберігаємо поточний місяць
+                    tileDisabled={({ date }) =>
+                      date < today || isDateBlocked(date)
+                    }
                   />
-                </div>
+                </CamperCalendar>
               )}
               <ErrorMessage component={ErrorMessageStyled} name="date" />
             </InputContainer>
-            <TextAreaField name="comment" as="textarea" placeholder="Comment" />
+            <InputContainer>
+              <TextAreaField
+                name="comment"
+                as="textarea"
+                placeholder="Comment"
+              />
+            </InputContainer>
             <Button type="submit">Submit</Button>
           </BookCamperFormStyled>
         )}

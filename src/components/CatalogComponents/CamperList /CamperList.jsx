@@ -1,25 +1,56 @@
 import { useSelector } from "react-redux";
 import CamperListItem from "../CamperListItem/CamperListItem";
-import { selectFilteredContacts } from "../../../redux/camper/selectors";
-import { CamperListItemStyle, CamperListStyled } from "./CamperList.styled";
+import {
+  ButtonCamperList,
+  CamperListItemStyle,
+  CamperListStyled,
+  ContainerCamperList,
+} from "./CamperList.styled";
+import { selectFilteredLocation } from "../../../redux/filter/selectors";
+import { useState, useEffect } from "react";
+import { selectTotal } from "../../../redux/camper/selectors";
 
 const CamperList = () => {
-  const campers = useSelector(selectFilteredContacts);
+  const location = useSelector(selectFilteredLocation);
+  const totalItems = useSelector(selectTotal);
 
-  console.log(campers);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [location]);
+
+  const indexOfLastCamper = currentPage * itemsPerPage;
+  const indexOfFirstCamper = indexOfLastCamper - itemsPerPage;
+  const currentCampers = location.slice(indexOfFirstCamper, indexOfLastCamper);
+
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
 
   return (
-    <>
+    <ContainerCamperList>
       <CamperListStyled>
-        {campers.map((camper) => {
-          return (
-            <CamperListItemStyle key={camper.id}>
-              <CamperListItem camper={camper} />
-            </CamperListItemStyle>
-          );
-        })}
+        {currentCampers.map((camper) => (
+          <CamperListItemStyle key={camper.id}>
+            <CamperListItem camper={camper} />
+          </CamperListItemStyle>
+        ))}
       </CamperListStyled>
-    </>
+      <div>
+        <ButtonCamperList
+          onClick={goToNextPage}
+          disabled={currentPage === totalPages}
+        >
+          Load more
+        </ButtonCamperList>
+      </div>
+    </ContainerCamperList>
   );
 };
 

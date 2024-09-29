@@ -18,7 +18,7 @@ const CamperListItem = ({ camper }) => {
 
   return (
     <>
-      <CamperPhotos gallery={gallery} name={name} />
+      <CamperPhotos gallery={gallery} name={name} slidesToShow={1} />
       <DiscCamperCatalogContainer>
         <div>
           <NameAndPrice price={price} name={name} id={id} />

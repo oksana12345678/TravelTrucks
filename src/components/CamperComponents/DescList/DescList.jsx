@@ -16,15 +16,11 @@ const DescList = ({ camper }) => {
     <ul>
       <OptionListContainer>
         {equipmentOptions.map(({ key, icon, label }) => {
-          const showItem = key === "engine" ? label : camper[key];
-
           return (
-            showItem && (
-              <DescListItem key={key}>
-                <Icon id={icon} width={20} height={20} />
-                {label || key}
-              </DescListItem>
-            )
+            <DescListItem key={key}>
+              <Icon id={icon} width={20} height={20} />
+              {label || key}
+            </DescListItem>
           );
         })}
       </OptionListContainer>

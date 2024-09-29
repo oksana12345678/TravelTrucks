@@ -12,7 +12,7 @@ import {
 const Camper = ({ oneCamper }) => {
   const { description, gallery, location, name, price, rating, reviews } =
     oneCamper;
-  console.log(oneCamper);
+
   return (
     <CamperContainerStyled>
       <NameLocationLocationContainer>
@@ -28,7 +28,9 @@ const Camper = ({ oneCamper }) => {
         <Price> €{price}</Price>
       </NameLocationLocationContainer>
 
-      {gallery && <CamperPhotos gallery={gallery} name={name} />}
+      {gallery && (
+        <CamperPhotos gallery={gallery} name={name} slidesToShow={4} />
+      )}
       <CamperDescText>{description}</CamperDescText>
     </CamperContainerStyled>
   );

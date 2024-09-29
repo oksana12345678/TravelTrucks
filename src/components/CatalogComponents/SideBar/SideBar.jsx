@@ -1,14 +1,17 @@
 import VehicleEquipment from "./Filters/VehicleEquipment/VehicleEquipment";
 import VehicleType from "./Filters/VehicleType/VehicleType";
-import Location from "./Location/Location";
 import Button from "../../common/Button/Button";
 import { FiltersStyled, SideBarStyled } from "./SideBar.styled";
+import Location from "./Location/Location";
 
 const SideBar = ({
   selectedFilters,
+  selectedBackendFilters,
   handleFilter,
-  handleFiltered,
+  handleBackendFilter,
   handleSubmit,
+  selectedAutomaticFilters,
+  handleAutomaticFilter,
 }) => {
   return (
     <SideBarStyled>
@@ -18,10 +21,12 @@ const SideBar = ({
         <VehicleEquipment
           selectedFilters={selectedFilters}
           handleFilter={handleFilter}
+          selectedAutomaticFilters={selectedAutomaticFilters}
+          handleAutomaticFilter={handleAutomaticFilter}
         />
         <VehicleType
-          handleFiltered={handleFiltered}
-          selectedFilters={selectedFilters}
+          selectedFilters={selectedBackendFilters}
+          handleFilter={handleBackendFilter}
         />
       </FiltersStyled>
       <Button type="button" handler={handleSubmit}>

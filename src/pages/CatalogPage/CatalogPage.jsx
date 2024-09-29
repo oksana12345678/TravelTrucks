@@ -2,47 +2,75 @@ import { useDispatch, useSelector } from "react-redux";
 import SideBar from "../../components/CatalogComponents/SideBar/SideBar";
 import { MainContainer, SectionStyle } from "./CatalogPage.styled";
 import { useEffect, useState } from "react";
-import { fetchAllCampers } from "../../redux/camper/operation";
-import { selectFilter, selectQuery } from "../../redux/filter/selectors.js";
-import { selectFilteredContacts } from "../../redux/camper/selectors";
-import { setFilterQuery, setStatusFilter } from "../../redux/filter/slice.js";
+import {
+  fetchAllCampers,
+  fetchAutomaticCampers,
+} from "../../redux/camper/operation";
+import {
+  selectFilter,
+  selectQuery,
+  selectTemporaryStorage,
+} from "../../redux/filter/selectors.js";
+import {
+  setFilterQuery,
+  setStatusFilter,
+  setTemporaryStorage,
+} from "../../redux/filter/slice.js";
 import CamperList from "../../components/CatalogComponents/CamperList /CamperList.jsx";
 
 const CatalogPage = () => {
-  const [appliedFilters, setAppliedFilters] = useState([]);
   const dispatch = useDispatch();
-  const filters = useSelector(selectFilter);
-  const selectedQuery = useSelector(selectQuery);
+  const frontendFilters = useSelector(selectFilter);
+  const backendFilters = useSelector(selectQuery);
+  const temporaryStorage = useSelector(selectTemporaryStorage);
+
+  const [tempFrontendFilters, setTempFrontendFilters] =
+    useState(frontendFilters);
+  const [tempBackendFilters, setTempBackendFilters] = useState(backendFilters);
+  const [tempAutomaticFilters, setTempAutomaticFilters] =
+    useState(temporaryStorage);
 
   useEffect(() => {
     dispatch(fetchAllCampers());
   }, [dispatch]);
 
-  console.log(appliedFilters);
+  useEffect(() => {
+    if (tempAutomaticFilters.length > 0) {
+      dispatch(setTemporaryStorage(tempAutomaticFilters));
+    }
+    if (tempBackendFilters.length > 0) {
+      dispatch(setFilterQuery(tempBackendFilters));
+    }
+  }, [tempBackendFilters, tempAutomaticFilters, dispatch]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(setStatusFilter(appliedFilters));
+    try {
+      await Promise.all([
+        dispatch(fetchAutomaticCampers(temporaryStorage)),
+        dispatch(fetchAllCampers(backendFilters)),
+      ]);
 
-    dispatch(selectFilteredContacts(filters));
-
-    setAppliedFilters([]);
+      dispatch(setStatusFilter(tempFrontendFilters));
+    } catch (error) {
+      console.error("Error fetching campers:", error);
+    }
   };
-
-  console.log(appliedFilters);
 
   return (
     <SectionStyle>
       <MainContainer>
         <SideBar
-          selectedFilters={appliedFilters} // Передаємо актуальні фільтри
-          handleFilter={setAppliedFilters} // Оновлення фільтрів
-          handleSubmit={handleSubmit} // Сабміт фільтрів
+          selectedFilters={tempFrontendFilters}
+          selectedBackendFilters={tempBackendFilters}
+          selectedAutomaticFilters={tempAutomaticFilters}
+          handleFilter={setTempFrontendFilters}
+          handleAutomaticFilter={setTempAutomaticFilters}
+          handleBackendFilter={setTempBackendFilters}
+          handleSubmit={handleSubmit}
         />
-
         <CamperList />
-        {/* CamperList отримує відфільтровані дані через Redux */}
       </MainContainer>
     </SectionStyle>
   );
