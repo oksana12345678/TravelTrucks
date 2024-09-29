@@ -57,4 +57,10 @@ export const DescListItem = styled.button`
   &:hover {
     border-color: var(--primary-red-orang-color);
   }
+
+  ${(props) =>
+    props.$isSelected &&
+    `
+    border-color: var(--primary-red-orang-color);
+  `}
 `;

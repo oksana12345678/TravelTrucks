@@ -1,3 +1,4 @@
+import { DotLoader } from "react-spinners";
 import styled from "styled-components";
 
 export const CamperListStyled = styled.ul`
@@ -42,4 +43,11 @@ export const ButtonCamperList = styled.button`
   &:hover {
     border: 1px solid var(--button-hover-color);
   }
+`;
+
+export const Loader = styled(DotLoader)`
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, 400%);
 `;

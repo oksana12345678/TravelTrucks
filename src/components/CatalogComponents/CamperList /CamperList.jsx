@@ -5,13 +5,19 @@ import {
   CamperListItemStyle,
   CamperListStyled,
   ContainerCamperList,
+  Loader,
 } from "./CamperList.styled";
 import { useState, useEffect } from "react";
-import { selectCamperList, selectTotal } from "../../../redux/camper/selectors";
+import {
+  selectCamperList,
+  selectIsLoading,
+  selectTotal,
+} from "../../../redux/camper/selectors";
 
 const CamperList = () => {
-  const location = useSelector(selectCamperList);
+  const camperList = useSelector(selectCamperList);
   const totalItems = useSelector(selectTotal);
+  const loading = useSelector(selectIsLoading);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
@@ -22,7 +28,10 @@ const CamperList = () => {
 
   const indexOfLastCamper = currentPage * itemsPerPage;
   const indexOfFirstCamper = indexOfLastCamper - itemsPerPage;
-  const currentCampers = location.slice(indexOfFirstCamper, indexOfLastCamper);
+  const currentCampers = camperList.slice(
+    indexOfFirstCamper,
+    indexOfLastCamper
+  );
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -33,23 +42,29 @@ const CamperList = () => {
   };
 
   return (
-    <ContainerCamperList>
-      <CamperListStyled>
-        {currentCampers.map((camper) => (
-          <CamperListItemStyle key={camper.id}>
-            <CamperListItem camper={camper} />
-          </CamperListItemStyle>
-        ))}
-      </CamperListStyled>
-      <div>
-        <ButtonCamperList
-          onClick={goToNextPage}
-          disabled={currentPage === totalPages}
-        >
-          Load more
-        </ButtonCamperList>
-      </div>
-    </ContainerCamperList>
+    <>
+      {loading ? (
+        <Loader color="var( --primary-text-color)" />
+      ) : (
+        <ContainerCamperList>
+          <CamperListStyled>
+            {currentCampers.map((camper) => (
+              <CamperListItemStyle key={camper.id}>
+                <CamperListItem camper={camper} />
+              </CamperListItemStyle>
+            ))}
+          </CamperListStyled>
+          <div>
+            <ButtonCamperList
+              onClick={goToNextPage}
+              disabled={currentPage === totalPages}
+            >
+              Load more
+            </ButtonCamperList>
+          </div>
+        </ContainerCamperList>
+      )}
+    </>
   );
 };
 

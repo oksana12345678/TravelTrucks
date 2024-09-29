@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import { DotLoader } from "react-spinners";
 import styled from "styled-components";
 
 export const CamperPageSectionStyled = styled.section`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  padding-top: 48px;
 `;
 
 export const MiniMenuBarContainer = styled.div`
@@ -25,21 +27,6 @@ export const MiniMenuBarList = styled.ul`
   gap: 40px;
   list-style: none;
 `;
-
-// export const LinkStyled = styled(Link)`
-//   font-family: var(--font-family);
-//   font-weight: var(--bolt-font);
-//   font-size: 20px;
-//   line-height: 1.2;
-//   color: var(--main-color);
-
-//   &::after {
-//     content: "";
-//     width: 5px;
-//     height: 2px;
-//     background-color: var(--primary-red-orang-color);
-//   }
-// `;
 
 export const LinkStyled = styled(Link)`
   font-family: var(--font-family);
@@ -65,4 +52,11 @@ export const LinkStyled = styled(Link)`
   &:active::after {
     width: 100%;
   }
+`;
+
+export const Loader = styled(DotLoader)`
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
 `;
