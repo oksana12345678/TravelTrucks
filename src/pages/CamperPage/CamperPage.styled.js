@@ -16,7 +16,6 @@ export const MiniMenuBarContainer = styled.div`
   &::after {
     content: "";
     background-color: var(--secondary-gray-light);
-    width: 1312px;
     height: 1px;
   }
 `;

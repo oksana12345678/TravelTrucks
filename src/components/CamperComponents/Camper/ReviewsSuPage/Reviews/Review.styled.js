@@ -8,7 +8,7 @@ export const ReviewsList = styled.ul`
 `;
 
 export const ReviewsListItem = styled.li`
-  width: 632px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;

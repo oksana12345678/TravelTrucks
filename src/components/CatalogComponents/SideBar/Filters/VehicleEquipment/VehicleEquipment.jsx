@@ -6,26 +6,64 @@ import {
 } from "./VehicleEquipment.styled";
 import Icon from "../../../../common/IconComponent/IconComponent";
 
-const VehicleEquipment = ({
-  selectedFilters,
-  handleFilter,
-  selectedAutomaticFilters,
-  handleAutomaticFilter,
-}) => {
-  const handleButtonClick = (equipment) => {
-    if (selectedFilters.includes(equipment)) {
-      handleFilter(selectedFilters.filter((item) => item !== equipment));
-    } else {
-      handleFilter([...selectedFilters, equipment]);
-    }
-  };
+const VEHICLE_EQUIPMENT_FILTER_BUTTONS = [
+  {
+    label: "AC",
+    icon: "ac",
+    type: "boolean",
+    fieldName: "AC",
+    value: true,
+  },
+  {
+    label: "TV",
+    icon: "tv",
+    type: "boolean",
+    fieldName: "TV",
+    value: true,
+  },
+  {
+    label: "bathroom",
+    icon: "bathroom",
+    type: "boolean",
+    fieldName: "bathroom",
+    value: true,
+  },
+  {
+    label: "kitchen",
+    icon: "kitchen",
+    type: "boolean",
+    fieldName: "kitchen",
+    value: true,
+  },
+  {
+    label: "radio",
+    icon: "radio",
+    type: "boolean",
+    fieldName: "radio",
+    value: true,
+  },
+  {
+    label: "automatic",
+    icon: "automatic",
+    type: "string",
+    fieldName: "transmission",
+    value: "automatic",
+  },
+];
 
-  const handleAutomaticButtonFilter = (equipment) => {
-    handleAutomaticFilter((prevFilters) =>
-      prevFilters.includes(equipment)
-        ? prevFilters.filter((item) => item !== equipment)
-        : [...prevFilters, equipment]
-    );
+const VehicleEquipment = ({
+  isFilterSelected,
+  backendFilters,
+  setBackendFilters,
+}) => {
+  const handleFilterSelect = (equipment) => {
+    if (isFilterSelected(equipment)) {
+      setBackendFilters(
+        backendFilters.filter((item) => item.fieldName !== equipment.fieldName)
+      );
+    } else {
+      setBackendFilters([...backendFilters, equipment]);
+    }
   };
 
   return (
@@ -33,32 +71,18 @@ const VehicleEquipment = ({
       <EquipmentTitle>Vehicle equipment</EquipmentTitle>
       <ul>
         <OptionListContainer>
-          {["AC", "TV", "Bathroom", "Kitchen", "Radio"].map((equipment) => (
-            <li key={equipment}>
+          {VEHICLE_EQUIPMENT_FILTER_BUTTONS.map((equipment) => (
+            <li key={equipment.label}>
               <DescListItem
                 type="button"
-                onClick={() => handleButtonClick(equipment)}
-                $isSelected={selectedFilters.includes(equipment)}
+                onClick={() => handleFilterSelect(equipment)}
+                $isSelected={isFilterSelected(equipment)}
               >
-                <Icon
-                  id={`icon-${equipment.toLowerCase()}`}
-                  width={32}
-                  height={32}
-                />
-                {equipment}
+                <Icon id={`icon-${equipment.icon}`} width={32} height={32} />
+                {equipment.label}
               </DescListItem>
             </li>
           ))}
-          <li>
-            <DescListItem
-              type="button"
-              onClick={() => handleAutomaticButtonFilter("Automatic")}
-              $isSelected={selectedAutomaticFilters.includes("Automatic")}
-            >
-              <Icon id="icon-automatic" width={32} height={32} />
-              Automatic
-            </DescListItem>
-          </li>
         </OptionListContainer>
       </ul>
     </MainEquipmentContainer>

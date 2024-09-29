@@ -24,4 +24,5 @@ export const Price = styled.p`
 export const FavoriteButton = styled.button`
   background-color: transparent;
   border: none;
+  cursor: pointer;
 `;

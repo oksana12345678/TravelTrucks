@@ -1,27 +1,39 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { LocationInput, LocationLabel, MapIcon } from "./Location.styled";
-import { selectLocation } from "../../../../redux/filter/selectors";
-import { setLocation } from "../../../../redux/filter/slice";
 
-const Location = () => {
-  const dispatch = useDispatch();
-  const selectedLocation = useSelector(selectLocation);
+const Location = ({
+  setBackendFilters,
+  backendFilters,
+  resetLocationInput,
+}) => {
+  const [location, setLocation] = useState(""); // State to track input value
 
-  const handleFilter = (e) => {
-    const query = e.target.value.trim();
-    dispatch(setLocation(query));
+  const handleFilterSelect = (e) => {
+    const queryFilter = e.target.value.trim();
+    setLocation(queryFilter); // Update input value state
+
+    // Update backendFilters with the location
+    if (queryFilter) {
+      setBackendFilters([
+        ...backendFilters,
+        { fieldName: "location", value: queryFilter },
+      ]);
+    }
   };
+
+  // Reset the location input field
 
   return (
     <LocationLabel>
       Location
       <LocationInput
         placeholder="City"
-        value={selectedLocation}
-        onChange={handleFilter}
+        value={location} // Control the input value
+        onChange={handleFilterSelect}
       />
       <MapIcon />
     </LocationLabel>
   );
 };
+
 export default Location;

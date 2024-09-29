@@ -6,7 +6,8 @@ export const BookCamperTitleStyled = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid var(--secondary-gray-light);
-  width: 642px;
+  width: 50%;
+  max-width: 632px;
   justify-content: center;
   gap: 24px;
   padding: 0 56px;

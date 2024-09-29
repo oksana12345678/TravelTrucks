@@ -10,7 +10,6 @@ export const SwiperStyle = styled(Swiper)`
     display: flex;
     justify-content: center;
     align-items: center;
-
     border-radius: 10px;
     height: 320px;
     width: 292px;

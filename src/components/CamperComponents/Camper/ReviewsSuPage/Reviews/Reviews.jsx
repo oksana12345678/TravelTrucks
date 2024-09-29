@@ -40,7 +40,7 @@ const Reviews = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: "50%", minWidth: "300px" }}>
       {reviews && (
         <ReviewsList>
           {reviews.map((review, index) => (

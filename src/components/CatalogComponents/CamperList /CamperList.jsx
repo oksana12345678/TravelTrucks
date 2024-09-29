@@ -6,12 +6,11 @@ import {
   CamperListStyled,
   ContainerCamperList,
 } from "./CamperList.styled";
-import { selectFilteredLocation } from "../../../redux/filter/selectors";
 import { useState, useEffect } from "react";
-import { selectTotal } from "../../../redux/camper/selectors";
+import { selectCamperList, selectTotal } from "../../../redux/camper/selectors";
 
 const CamperList = () => {
-  const location = useSelector(selectFilteredLocation);
+  const location = useSelector(selectCamperList);
   const totalItems = useSelector(selectTotal);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,7 +18,7 @@ const CamperList = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [location]);
+  }, []);
 
   const indexOfLastCamper = currentPage * itemsPerPage;
   const indexOfFirstCamper = indexOfLastCamper - itemsPerPage;

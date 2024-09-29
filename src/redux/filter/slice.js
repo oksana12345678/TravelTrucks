@@ -9,25 +9,12 @@ const filterSlice = createSlice({
   name: "filter",
   initialState: {
     status: [],
-    query: [],
-    temporaryStorage: [],
-    location: "",
     favorites: getFavoritesFromLocalStorage(),
   },
   reducers: {
     setStatusFilter: (state, action) => {
       state.status = action.payload;
     },
-    setFilterQuery: (state, action) => {
-      state.query = action.payload;
-    },
-    setTemporaryStorage: (state, action) => {
-      state.temporaryStorage = action.payload;
-    },
-    setLocation: (state, action) => {
-      state.location = action.payload;
-    },
-
     setFavorite(state, action) {
       const index = state.favorites.indexOf(action.payload);
       if (index === -1) {
@@ -40,11 +27,5 @@ const filterSlice = createSlice({
   },
 });
 
-export const {
-  setStatusFilter,
-  setFilterQuery,
-  setFavorite,
-  setTemporaryStorage,
-  setLocation,
-} = filterSlice.actions;
+export const { setStatusFilter, setFavorite } = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;

@@ -62,15 +62,6 @@ const BookCamperForm = () => {
     }
   };
 
-  const tileDisabled = ({ date, view }) => {
-    if (view === "month") {
-      if (date < today) {
-        return true;
-      }
-      return isDateBlocked(date);
-    }
-  };
-
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
