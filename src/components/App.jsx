@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import SharedLayout from "./common/SharedLayout/SharedLayout";
 import { Route, Routes } from "react-router";
 import Features from "./CamperComponents/Camper/Features/Features.jsx";
-import ReviewsSubPage from "./CamperComponents/Camper/ReviewsSuPpage/ReviewsSubpage.jsx";
+import ReviewsSubPage from "./CamperComponents/Camper/ReviewsSuPage/ReviewsSubPage.jsx";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const CatalogPage = lazy(() => import("../pages/CatalogPage/CatalogPage"));
