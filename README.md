@@ -6,11 +6,10 @@ TravelTrucks is a React-based web application designed to facilitate travel-rela
 
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Scripts](#scripts)
+
 - [Dependencies](#dependencies)
-- [Development](#development)
-- [License](#license)
+
+
 
 ## Features
 
