@@ -3,16 +3,30 @@ import Calendar from "react-calendar";
 import styled from "styled-components";
 
 export const BookCamperTitleStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--secondary-gray-light);
-  width: 50%;
-  max-width: 632px;
-  justify-content: center;
-  gap: 24px;
-  padding: 0 56px;
-  min-height: 588px;
-  border-radius: 10px;
+  @media screen and (min-width: 320px) {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--secondary-gray-light);
+    max-width: 300px;
+    justify-content: center;
+    gap: 24px;
+    padding: 0 8px;
+    min-height: 588px;
+    border-radius: 10px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--secondary-gray-light);
+    width: 50%;
+    max-width: 632px;
+    justify-content: center;
+    gap: 24px;
+    padding: 0 56px;
+    min-height: 588px;
+    border-radius: 10px;
+  }
 `;
 
 export const BookCamperTitleContainer = styled.div`
@@ -22,11 +36,17 @@ export const BookCamperTitleContainer = styled.div`
 `;
 
 export const BookCamperFormStyled = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  width: 526px;
-  gap: 14px;
-  align-items: center;
+  @media screen and (min-width: 320px) {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    gap: 14px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: 526px;
+  }
 `;
 
 export const InputField = styled(Field)`
@@ -45,11 +65,13 @@ export const TextAreaField = styled(Field)`
   border-radius: 12px;
   padding: 18px 0 0 18px;
   margin-bottom: 10px;
-  width: 526px;
+  width: 100%;
   overflow: scroll;
 `;
 export const InputContainer = styled.div`
-  width: 526px;
+  @media screen and (min-width: 320px) {
+    width: 100%;
+  }
 `;
 
 export const ErrorMessageStyled = styled.p`

@@ -69,22 +69,21 @@ const VehicleEquipment = ({
   return (
     <MainEquipmentContainer>
       <EquipmentTitle>Vehicle equipment</EquipmentTitle>
-      <ul>
-        <OptionListContainer>
-          {VEHICLE_EQUIPMENT_FILTER_BUTTONS.map((equipment) => (
-            <li key={equipment.label}>
-              <DescListItem
-                type="button"
-                onClick={() => handleFilterSelect(equipment)}
-                $isSelected={isFilterSelected(equipment)}
-              >
-                <Icon id={`icon-${equipment.icon}`} width={32} height={32} />
-                {equipment.label}
-              </DescListItem>
-            </li>
-          ))}
-        </OptionListContainer>
-      </ul>
+
+      <OptionListContainer>
+        {VEHICLE_EQUIPMENT_FILTER_BUTTONS.map((equipment) => (
+          <li key={equipment.label}>
+            <DescListItem
+              type="button"
+              onClick={() => handleFilterSelect(equipment)}
+              $isSelected={isFilterSelected(equipment)}
+            >
+              <Icon id={`icon-${equipment.icon}`} width={32} height={32} />
+              {equipment.label}
+            </DescListItem>
+          </li>
+        ))}
+      </OptionListContainer>
     </MainEquipmentContainer>
   );
 };

@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import SharedLayout from "./common/SharedLayout/SharedLayout";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Features from "./CamperComponents/Camper/Features/Features.jsx";
 import ReviewsSubPage from "./CamperComponents/Camper/ReviewsSuPage/ReviewsSubPage.jsx";
 import { Loader } from "./CatalogComponents/CamperList /CamperList.styled.js";
@@ -19,6 +19,7 @@ function App() {
           <Route path="/catalog/:camperId" element={<CamperPage />}>
             <Route path="features" element={<Features />} />
             <Route path="reviews" element={<ReviewsSubPage />} />
+            <Route index element={<Navigate to="features" replace />} />
           </Route>
         </Routes>
       </Suspense>

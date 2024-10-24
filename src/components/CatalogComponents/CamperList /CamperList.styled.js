@@ -8,14 +8,28 @@ export const CamperListStyled = styled.ul`
 `;
 
 export const CamperListItemStyle = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 888px;
-  border: 1px solid var(--secondary-gray-light);
-  border-radius: 20px;
-  padding: 24px;
-  gap: 24px;
+  @media screen and (min-width: 320px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    border: 1px solid var(--secondary-gray-light);
+    border-radius: 20px;
+    padding: 12px 4px;
+    gap: 24px;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 704px;
+    padding: 24px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    flex-direction: row;
+    max-width: 888px;
+    padding: 24px;
+  }
 `;
 
 export const ContainerCamperList = styled.div`

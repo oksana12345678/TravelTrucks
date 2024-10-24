@@ -19,18 +19,30 @@ export const EquipmentTitle = styled.h3`
   &::after {
     content: "";
     display: block;
-    width: 360px;
+    width: 100%;
     height: 1px;
     background-color: var(--secondary-gray-light);
   }
 `;
 
 export const OptionListContainer = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  gap: 8px;
-  width: 360px;
+  @media screen and (min-width: 320px) {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 8px;
+    width: 280px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 8px;
+    width: 360px;
+  }
 `;
 
 export const DescListItem = styled.button`

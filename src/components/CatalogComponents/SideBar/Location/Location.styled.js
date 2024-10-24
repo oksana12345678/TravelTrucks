@@ -2,17 +2,21 @@ import styled from "styled-components";
 import { BsMap } from "react-icons/bs";
 
 export const LocationLabel = styled.label`
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 320px) {
     font-family: var(--font-family);
     font-weight: var(--regular-font);
     font-size: 16px;
     line-height: 1.5;
     display: flex;
     flex-direction: column;
-    width: 360px;
+    width: 280px;
     gap: 8px;
     color: var(--secondary-gray-text-color);
     position: relative;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 360px;
   }
 `;
 
@@ -28,7 +32,7 @@ export const MapIcon = styled(BsMap)`
 `;
 
 export const LocationInput = styled.input`
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 320px) {
     width: 100%;
     height: 56px;
     background-color: var(--primary-inputs-color);

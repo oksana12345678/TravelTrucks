@@ -11,7 +11,9 @@ import { useSelector } from "react-redux";
 
 const CamperPhotos = ({ gallery, name, slidesToShow }) => {
   const location = useLocation();
-  const isCamperPage = location.pathname === "/catalog/:camperId";
+  const isCamperPage =
+    location.pathname === "/catalog/:camperId/features" ||
+    "/catalog/:camperId/reviews";
   const loading = useSelector(selectIsLoading);
 
   return (
@@ -29,7 +31,16 @@ const CamperPhotos = ({ gallery, name, slidesToShow }) => {
           pagination={{ clickable: true }}
           direction="horizontal"
           slidesPerView={slidesToShow}
-          spaceBetween={48}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: "auto",
+              spaceBetween: 20,
+            },
+          }}
         >
           <ul>
             {gallery.map((img, index) => {

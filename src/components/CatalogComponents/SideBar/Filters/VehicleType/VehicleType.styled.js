@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const MainVehicleContainer = styled.div`
   display: flex;
   flex-direction: column;
-
   gap: 24px;
 `;
 
@@ -12,6 +11,8 @@ export const OptionListContainer = styled.ul`
   flex-wrap: wrap;
   list-style: none;
   gap: 8px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const VehicleTitle = styled.h3`
@@ -27,7 +28,7 @@ export const VehicleTitle = styled.h3`
   &::after {
     content: "";
     display: block;
-    width: 360px;
+    width: 100%;
     height: 1px;
     background-color: var(--secondary-gray-light);
   }

@@ -9,29 +9,32 @@ const SideBar = ({ backendFilters, setBackendFilters, handleSubmit }) => {
     backendFilters?.some((filter) => filter.label === equipment.label);
 
   return (
-    <SideBarStyled>
-      <Location
-        isFilterSelected={isFilterSelected}
-        backendFilters={backendFilters}
-        setBackendFilters={setBackendFilters}
-      />
-      <FiltersStyled>
-        <h5>Filters</h5>
-        <VehicleEquipment
+    <>
+      <SideBarStyled>
+        <Location
           isFilterSelected={isFilterSelected}
           backendFilters={backendFilters}
           setBackendFilters={setBackendFilters}
         />
-        <VehicleType
-          isFilterSelected={isFilterSelected}
-          backendFilters={backendFilters}
-          setBackendFilters={setBackendFilters}
-        />
-      </FiltersStyled>
-      <Button type="button" handler={handleSubmit}>
-        Search
-      </Button>
-    </SideBarStyled>
+
+        <FiltersStyled>
+          <h5>Filters</h5>
+          <VehicleEquipment
+            isFilterSelected={isFilterSelected}
+            backendFilters={backendFilters}
+            setBackendFilters={setBackendFilters}
+          />
+          <VehicleType
+            isFilterSelected={isFilterSelected}
+            backendFilters={backendFilters}
+            setBackendFilters={setBackendFilters}
+          />
+        </FiltersStyled>
+        <Button type="button" handler={handleSubmit}>
+          Search
+        </Button>
+      </SideBarStyled>
+    </>
   );
 };
 

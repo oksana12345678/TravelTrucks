@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
 export const DiscCamperCatalogContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 524px;
-  gap: 24px;
+  @media screen and (min-width: 320px) {
+    display: flex;
+    flex-direction: column;
+    max-width: 280px;
+    gap: 24px;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 524px;
+  }
 `;
-
-
-
 
 export const DescText = styled.p`
   white-space: nowrap;

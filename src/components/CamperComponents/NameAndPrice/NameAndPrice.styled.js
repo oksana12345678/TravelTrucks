@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 export const NameAndPriceContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-family);
-  font-weight: var(--bolt-font);
-  font-size: 24px;
-  line-height: 1.33333;
-  color: var(--main-color);
+  @media screen and (min-width: 320px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-family: var(--font-family);
+    font-weight: var(--bolt-font);
+    font-size: 24px;
+    line-height: 1.33333;
+    color: var(--main-color);
+  }
 `;
 
 export const Price = styled.p`

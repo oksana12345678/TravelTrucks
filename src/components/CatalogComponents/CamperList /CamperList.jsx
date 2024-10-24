@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CamperListItem from "../CamperListItem/CamperListItem";
 import {
   ButtonCamperList,
@@ -14,32 +14,54 @@ import {
   selectTotal,
 } from "../../../redux/camper/selectors";
 import { DotLoader } from "react-spinners";
+import { fetchAllCampers } from "../../../redux/camper/operation";
 
 const CamperList = () => {
+  const dispatch = useDispatch();
   const camperList = useSelector(selectCamperList);
   const totalItems = useSelector(selectTotal);
   const loading = useSelector(selectIsLoading);
 
   const [displayedCampers, setDisplayedCampers] = useState([]);
-  const [loadingMore, setLoadingMore] = useState(false); // State for loading more campers
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
   useEffect(() => {
-    setDisplayedCampers(camperList.slice(0, itemsPerPage));
-  }, [camperList]);
+    dispatch(
+      fetchAllCampers({
+        appliedFilters: [],
+        page: currentPage,
+        limit: itemsPerPage,
+      })
+    );
+  }, [dispatch, currentPage]);
+
+  useEffect(() => {
+    setDisplayedCampers(camperList.slice(0, currentPage * itemsPerPage));
+  }, [camperList, currentPage]);
 
   const goToNextPage = () => {
-    setLoadingMore(true); // Set loading to true when starting to load more campers
-    const nextCampers = camperList.slice(
-      displayedCampers.length,
-      displayedCampers.length + itemsPerPage
-    );
+    if (displayedCampers.length < totalItems) {
+      setLoadingMore(true);
 
-    setTimeout(() => {
-      // Simulating network delay (you can remove this in production)
-      setDisplayedCampers((prevCampers) => [...prevCampers, ...nextCampers]);
-      setLoadingMore(false); // Reset loading state after loading campers
-    }, 1000); // Adjust the time as necessary
+      const nextPage = currentPage + 1;
+
+      dispatch(
+        fetchAllCampers({
+          appliedFilters: [],
+          page: nextPage,
+          limit: itemsPerPage,
+        })
+      )
+        .then(() => {
+          setCurrentPage(nextPage);
+          setLoadingMore(false);
+        })
+        .catch(() => {
+          setLoadingMore(false);
+        });
+    }
   };
 
   return (
@@ -55,11 +77,11 @@ const CamperList = () => {
               </CamperListItemStyle>
             ))}
           </CamperListStyled>
-          {displayedCampers.length < totalItems && ( // Show button only if there are more campers to load
+          {displayedCampers.length < totalItems && (
             <div>
               <ButtonCamperList onClick={goToNextPage} disabled={loadingMore}>
                 {loadingMore ? (
-                  <DotLoader color="var(--primary-text-color)" size="20" /> // You can customize the color
+                  <DotLoader color="var(--primary-text-color)" size="20" />
                 ) : (
                   "Load more"
                 )}

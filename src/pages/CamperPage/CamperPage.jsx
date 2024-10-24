@@ -1,17 +1,17 @@
 import { useEffect } from "react";
-import Camper from "../../components/CamperComponents/Camper/Camper";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, Outlet } from "react-router-dom";
 import { fetchOneCamper } from "../../redux/camper/operation";
-import { Outlet, useParams } from "react-router";
-import { selectIsLoading, selectOneCamper } from "../../redux/camper/selectors";
 import {
+  ActiveLinkStyled,
   CamperPageSectionStyled,
-  LinkStyled,
   LoaderCamper,
   MiniMenuBarContainer,
   MiniMenuBarList,
 } from "./CamperPage.styled";
 import { DotLoader } from "react-spinners";
+import Camper from "../../components/CamperComponents/Camper/Camper";
+import { selectIsLoading, selectOneCamper } from "../../redux/camper/selectors";
 
 const CamperPage = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const CamperPage = () => {
     <>
       {loading ? (
         <LoaderCamper>
-          <DotLoader color="var( --primary-text-color)" />
+          <DotLoader color="var(--primary-text-color)" />
         </LoaderCamper>
       ) : (
         <CamperPageSectionStyled>
@@ -35,10 +35,10 @@ const CamperPage = () => {
           <MiniMenuBarContainer>
             <MiniMenuBarList>
               <li>
-                <LinkStyled to="features">Features</LinkStyled>
+                <ActiveLinkStyled to="features">Features</ActiveLinkStyled>
               </li>
               <li>
-                <LinkStyled to="reviews">Reviews</LinkStyled>
+                <ActiveLinkStyled to="reviews">Reviews</ActiveLinkStyled>
               </li>
             </MiniMenuBarList>
           </MiniMenuBarContainer>

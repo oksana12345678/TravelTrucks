@@ -1,18 +1,13 @@
 import { useState } from "react";
 import { LocationInput, LocationLabel, MapIcon } from "./Location.styled";
 
-const Location = ({
-  setBackendFilters,
-  backendFilters,
-  resetLocationInput,
-}) => {
-  const [location, setLocation] = useState(""); // State to track input value
+const Location = ({ setBackendFilters, backendFilters }) => {
+  const [location, setLocation] = useState("");
 
   const handleFilterSelect = (e) => {
     const queryFilter = e.target.value.trim();
-    setLocation(queryFilter); // Update input value state
+    setLocation(queryFilter);
 
-    // Update backendFilters with the location
     if (queryFilter) {
       setBackendFilters([
         ...backendFilters,
@@ -21,14 +16,12 @@ const Location = ({
     }
   };
 
-  // Reset the location input field
-
   return (
     <LocationLabel>
       Location
       <LocationInput
         placeholder="City"
-        value={location} // Control the input value
+        value={location}
         onChange={handleFilterSelect}
       />
       <MapIcon />

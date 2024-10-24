@@ -1,10 +1,16 @@
 import styled from "styled-components";
 
 export const CamperContainerStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  padding: 0 64px;
+  @media screen and (min-width: 320px) {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 0 16px;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 0 64px;
+  }
 `;
 
 export const NameLocationDiv = styled.div`

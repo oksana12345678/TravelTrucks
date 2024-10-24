@@ -8,10 +8,19 @@ export const ReviewsList = styled.ul`
 `;
 
 export const ReviewsListItem = styled.li`
-  width: 632px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  @media screen and (min-width: 320px) {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: 632px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 `;
 
 export const LatterContainer = styled.div`
